@@ -198,7 +198,7 @@ BOOL CWatorSaverApp::InitInstance()
     {
         MessageBox(NULL, e.message().c_str(), _T("screen saver"), MB_ICONERROR | MB_OK);
     }
-    catch (std::exception &e)
+    catch (std::exception &)
     {
         MessageBox(NULL, _T("unexpected exception"), _T("screen saver"), MB_ICONERROR | MB_OK);
     }
