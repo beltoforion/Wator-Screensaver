@@ -15,7 +15,7 @@
   You should have received a copy of the GNU General Public License
   along with this program; if not, write to the Free Software
   Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
-*/
+  */
 
 #include "stdafx.h"
 
@@ -43,31 +43,31 @@
 //
 //-------------------------------------------------------------------------------------------
 
-BOOL CALLBACK MonitorEnumCallback( HMONITOR a_hMonitor,
-                                   HDC a_hdcMonitor,
-                                   LPRECT a_lpRect,
-                                   LPARAM a_dwData )
+BOOL CALLBACK MonitorEnumCallback(HMONITOR a_hMonitor,
+    HDC a_hdcMonitor,
+    LPRECT a_lpRect,
+    LPARAM a_dwData)
 {
-  std::vector<RECT> *pVec = (std::vector<RECT>*)a_dwData;
-  pVec->push_back( *a_lpRect );
-  return TRUE;
+    std::vector<RECT> *pVec = (std::vector<RECT>*)a_dwData;
+    pVec->push_back(*a_lpRect);
+    return TRUE;
 }
 
 //--------------------------------------------------------------------------
 // CWatorSaverApp
 BEGIN_MESSAGE_MAP(CWatorSaverApp, CWinApp)
-	ON_COMMAND(ID_HELP, CWinApp::OnHelp)
+    ON_COMMAND(ID_HELP, CWinApp::OnHelp)
 END_MESSAGE_MAP()
 
 
 //--------------------------------------------------------------------------
 // CWatorSaverApp-Erstellung
 CWatorSaverApp::CWatorSaverApp()
-  :m_hWnd(0)
-  ,m_Mode(smVOID)
-  ,m_vpWator()
-  ,m_iNumScreens(0)
-  ,m_vScreens()
+:m_hWnd(0)
+, m_Mode(smVOID)
+, m_vpWator()
+, m_iNumScreens(0)
+, m_vScreens()
 {
 }
 
@@ -75,13 +75,13 @@ CWatorSaverApp::CWatorSaverApp()
 //--------------------------------------------------------------------------
 CWatorSaverApp::~CWatorSaverApp()
 {
-  for (unsigned i=0; i<m_vpWator.size(); ++i)
-  {
-    delete m_vpWator[i];
-  }
-  m_vpWator.clear();
+    for (unsigned i = 0; i < m_vpWator.size(); ++i)
+    {
+        delete m_vpWator[i];
+    }
+    m_vpWator.clear();
 
-//  _CrtDumpMemoryLeaks();
+    //  _CrtDumpMemoryLeaks();
 }
 
 //--------------------------------------------------------------------------
@@ -94,116 +94,120 @@ CWatorSaverApp theApp;
 // CWatorSaverApp Initialisierung
 BOOL CWatorSaverApp::InitInstance()
 {
-  SetRegistryKey(_T("Wator screen saver"));
-  CWinApp::InitInstance();
-  BOOL bRet(FALSE);
+    SetRegistryKey(_T("Wator screen saver"));
+    CWinApp::InitInstance();
+    BOOL bRet(FALSE);
 
-  try
-  {
-    switch (SaverInit())
+    try
     {
-    case smPREVIEW:
+        switch (SaverInit())
         {
-          ASSERT(m_hWnd);  
+        case smPREVIEW:
+        {
+                          ASSERT(m_hWnd);
 
-          CRect rect;
-          CWnd *pParentWin = CWnd::FromHandle(m_hWnd);
-		      pParentWin->GetClientRect(&rect);
-          
-      		// Create the saver window
-          ASSERT(m_vpWator.size()==0);
-          CWatorGL *pWator = new CWatorGL(640, 480);
-      	  pWator->Create( NULL, 
-                          WS_VISIBLE | WS_CHILD, 
-                          rect, 
-                          pParentWin, 
-                          NULL );
-          m_vpWator.push_back(pWator);
+                          CRect rect;
+                          CWnd *pParentWin = CWnd::FromHandle(m_hWnd);
+                          pParentWin->GetClientRect(&rect);
 
-          // Set the application main window
-          m_pMainWnd = pWator;
-          bRet = TRUE;
+                          // Create the saver window
+                          ASSERT(m_vpWator.size() == 0);
+                          CWatorGL *pWator = new CWatorGL(640, 480);
+                          pWator->Create(NULL,
+                              WS_VISIBLE | WS_CHILD,
+                              rect,
+                              pParentWin,
+                              NULL);
+                          m_vpWator.push_back(pWator);
+
+                          // Set the application main window
+                          m_pMainWnd = pWator;
+                          bRet = TRUE;
         }
-        break;
+            break;
 
- 		// Create the saver window and show the screensaver
-    case smSAVER:
+            // Create the saver window and show the screensaver
+        case smSAVER:
         {
-          m_iNumScreens = ::GetSystemMetrics(SM_CMONITORS);
+                        m_iNumScreens = ::GetSystemMetrics(SM_CMONITORS);
 
-          BOOL bMultScreen = AfxGetApp()->GetProfileInt( CWatorSaverDlg::m_szConfig,
-                                                         _T("MultScreen"),
-                                                         FALSE );
-          if (!bMultScreen)
-          {
-            int w = ::GetSystemMetrics(SM_CXSCREEN), 
-                h = ::GetSystemMetrics(SM_CYSCREEN);
-            CRect rect(0, 0, w, h);
+                        BOOL bMultScreen = AfxGetApp()->GetProfileInt(CWatorSaverDlg::m_szConfig,
+                            _T("MultScreen"),
+                            FALSE);
+                        if (!bMultScreen)
+                        {
+                            int w = ::GetSystemMetrics(SM_CXSCREEN),
+                                h = ::GetSystemMetrics(SM_CYSCREEN);
+                            CRect rect(0, 0, w, h);
 
-            // Create an insatnce for each screen
-            CWatorGL *pWator = new CWatorGL;
-            pWator->Create(rect);
-            m_vpWator.push_back( pWator );
+                            // Create an insatnce for each screen
+                            CWatorGL *pWator = new CWatorGL;
+                            pWator->Create(rect);
+                            m_vpWator.push_back(pWator);
 
-            m_pMainWnd = pWator;
-          }
-          else
-          {
-            for (int i=0; i<m_iNumScreens; ++i)
-            {
-              // Get the Rectangles for each screen
-              EnumDisplayMonitors( NULL,
-                                   NULL,
-                                   MonitorEnumCallback, 
-                                  (LPARAM)(&m_vScreens) );
+                            m_pMainWnd = pWator;
+                        }
+                        else
+                        {
+                            for (int i = 0; i < m_iNumScreens; ++i)
+                            {
+                                // Get the Rectangles for each screen
+                                EnumDisplayMonitors(NULL,
+                                    NULL,
+                                    MonitorEnumCallback,
+                                    (LPARAM)(&m_vScreens));
 
-              // Create an insatnce for each screen
-              CWatorGL *pWator = new CWatorGL;
-              pWator->Create(m_vScreens[i]);
-              m_vpWator.push_back( pWator );
+                                // Create an insatnce for each screen
+                                CWatorGL *pWator = new CWatorGL;
+                                pWator->Create(m_vScreens[i]);
+                                m_vpWator.push_back(pWator);
 
-              m_pMainWnd = pWator;
-            } // for all screens
-          }
+                                m_pMainWnd = pWator;
+                            } // for all screens
+                        }
 
-          bRet = TRUE;
+                        bRet = TRUE;
         }
-        break;
+            break;
 
-    case smCONFIG:
+        case smCONFIG:
         {
-          CWatorSaverDlg dlg;
-          m_pMainWnd = &dlg;
-          INT_PTR nResponse = dlg.DoModal();
-	        if (nResponse == IDOK)
-	        {
-		        dlg.StoreConfig();
-	        }
-	        else if (nResponse == IDCANCEL)
-	        {
-	        }
+                         CWatorSaverDlg dlg;
+                         m_pMainWnd = &dlg;
+                         INT_PTR nResponse = dlg.DoModal();
+                         if (nResponse == IDOK)
+                         {
+                             dlg.StoreConfig();
+                         }
+                         else if (nResponse == IDCANCEL)
+                         {
+                         }
 
-          // Da das Dialogfeld geschlossen wurde, FALSE zurückliefern, so dass wir die
-	        //  Anwendung verlassen, anstatt das Nachrichtensystem der Anwendung zu starten.
-          bRet = FALSE;
-        }    
-        break;
+                         // Da das Dialogfeld geschlossen wurde, FALSE zurückliefern, so dass wir die
+                         //  Anwendung verlassen, anstatt das Nachrichtensystem der Anwendung zu starten.
+                         bRet = FALSE;
+        }
+            break;
 
-    default:
-        MessageBox(NULL, _T("internal error"), _T("screen saver"), MB_ICONERROR | MB_OK);
-        bRet = FALSE;
+        default:
+            MessageBox(NULL, _T("internal error"), _T("screen saver"), MB_ICONERROR | MB_OK);
+            bRet = FALSE;
+        }
     }
-  }
-  catch(std::exception &e)
-  {
-    MessageBox(NULL, e.what(), _T("screen saver"), MB_ICONERROR | MB_OK);
-  }
-  catch(...)
-  {
-    MessageBox(NULL, _T("internal error"), _T("screen saver"), MB_ICONERROR | MB_OK);
-  }
+    catch (utils::wruntime_error &e)
+    {
+        MessageBox(NULL, e.message().c_str(), _T("screen saver"), MB_ICONERROR | MB_OK);
+    }
+    catch (std::exception &e)
+    {
+        MessageBox(NULL, _T("unexpected exception"), _T("screen saver"), MB_ICONERROR | MB_OK);
+    }
+    catch (...)
+    {
+        MessageBox(NULL, _T("internal error"), _T("screen saver"), MB_ICONERROR | MB_OK);
+    }
 
-	return bRet;
+    return bRet;
 }
 
 
@@ -212,52 +216,52 @@ BOOL CWatorSaverApp::InitInstance()
 //-------------------------------------------------------------------------------------------
 CWatorSaverApp::ESaverMode CWatorSaverApp::SaverInit()
 {
-  // Check command line parameters
-  wu::Parameter &param(wu::Parameter::GetInst());
-  
-  if (param.GetArgc()==1)
-  {
-    m_Mode = smCONFIG; 
-    m_hWnd = NULL;
-  }
-  else
-  {
-    // Pop up configuration dialog
-    // Parameters:
-    //      "/C"      - GetForegroundWindow() shall be parent
-    //      "/C ####" - decimal interpretation of #### shall be parent
-    //      none      - NULL should be the parent
-    if (param.IsOpt("C"))
+    // Check command line parameters
+    wu::Parameter &param(wu::Parameter::GetInst());
+
+    if (param.GetArgc() == 1)
     {
-      m_Mode = smCONFIG;
-      int iVal(0);
-      if ( std::sscanf(param.GetOpt("C").c_str(), "%d", &iVal)==1)
-      {
-        m_hWnd = reinterpret_cast<HWND>(iVal);
-      } 
+        m_Mode = smCONFIG;
+        m_hWnd = NULL;
     }
-
-    // Run as a full screen saver
-    // command line parameter:
-    //    "/S"   - run full screen
-    if (param.IsOpt("S"))
+    else
     {
-      m_Mode = smSAVER;
-    }
+        // Pop up configuration dialog
+        // Parameters:
+        //      "/C"      - GetForegroundWindow() shall be parent
+        //      "/C ####" - decimal interpretation of #### shall be parent
+        //      none      - NULL should be the parent
+        if (param.IsOpt(_T("C")))
+        {
+            m_Mode = smCONFIG;
+            int iVal(0);
+            if (std::swscanf(param.GetOpt(_T("C")).c_str(), _T("%d"), &iVal) == 1)
+            {
+                m_hWnd = reinterpret_cast<HWND>(iVal);
+            }
+        }
 
-    // Run a preview 
-    if (param.IsOpt("P") ) // || param.IsOpt("l"))
-    {
-      m_Mode = smPREVIEW;
-      int iVal(0);
-      if ( std::sscanf(param.GetOpt("p").c_str(), "%d", &iVal)==1)
-        m_hWnd = reinterpret_cast<HWND>(iVal);
+        // Run as a full screen saver
+        // command line parameter:
+        //    "/S"   - run full screen
+        if (param.IsOpt(_T("S")))
+        {
+            m_Mode = smSAVER;
+        }
 
-//      ::MessageBox(NULL, GetCommandLine(), NULL, MB_OK);
-    } 
-  } // if argc!=1
+        // Run a preview 
+        if (param.IsOpt(_T("P"))) // || param.IsOpt("l"))
+        {
+            m_Mode = smPREVIEW;
+            int iVal(0);
+            if (std::swscanf(param.GetOpt(_T("p")).c_str(), _T("%d"), &iVal) == 1)
+                m_hWnd = reinterpret_cast<HWND>(iVal);
 
-  return m_Mode;
+            //      ::MessageBox(NULL, GetCommandLine(), NULL, MB_OK);
+        }
+    } // if argc!=1
+
+    return m_Mode;
 }
 
 #pragma warning(default:4312)

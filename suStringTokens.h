@@ -25,13 +25,16 @@
 #include <string>
 #include <vector>
 
+#include "utWideExceptions.h"
+
 
 namespace su
 {
 
-struct TokenNotFound : public std::runtime_error
+struct TokenNotFound : public utils::wruntime_error
 {
-  TokenNotFound() : std::runtime_error("Token not found") {};
+    TokenNotFound() : utils::wruntime_error(_T("Token not found")) 
+    {};
 };
 
 //---------------------------------------------------------------------------
@@ -61,7 +64,7 @@ private:
 public:
 
     //--- Konstruktor -----------------------------------------------------------
-    StringTokens(const string_type &a_sInput, const string_type &a_sDelim = " ")
+    StringTokens(const string_type &a_sInput, const string_type &a_sDelim = _T(" "))
       :m_delimiter(a_sDelim)
       ,m_tokens()
     {
@@ -70,7 +73,7 @@ public:
 
     //--- Default Konstruktor ---------------------------------------------------
     StringTokens()
-      :m_delimiter(string_type(" "))
+      :m_delimiter(string_type(_T(" ")))
       ,m_tokens()
     {}
 
@@ -79,7 +82,7 @@ public:
     {}
 
     //---------------------------------------------------------------------------
-    void Tokenize(const string_type &a_sInput, const string_type &a_sDelim = " ")
+    void Tokenize(const string_type &a_sInput, const string_type &a_sDelim = _T(" "))
     {
       string_type buf(a_sInput);
 
