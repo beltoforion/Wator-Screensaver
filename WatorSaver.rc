@@ -13,13 +13,11 @@
 #undef APSTUDIO_READONLY_SYMBOLS
 
 /////////////////////////////////////////////////////////////////////////////
-// Deutsch (Deutschland) resources
+// German (Germany) resources
 
 #if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)
-#ifdef _WIN32
 LANGUAGE LANG_GERMAN, SUBLANG_GERMAN
 #pragma code_page(1252)
-#endif //_WIN32
 
 #ifdef APSTUDIO_INVOKED
 /////////////////////////////////////////////////////////////////////////////
@@ -86,14 +84,14 @@ BEGIN
     EDITTEXT        IDC_ENERGY_PER_PREY,88,115,56,14,ES_AUTOHSCROLL
     EDITTEXT        IDC_ENERGY_FOR_OFFSPRING,88,143,56,14,ES_AUTOHSCROLL
     EDITTEXT        IDC_MAXAGE,87,206,56,14,ES_AUTOHSCROLL
-    CONTROL         130,IDC_STATIC,"Static",SS_BITMAP | SS_CENTERIMAGE | WS_BORDER,16,179,60,58
-    CONTROL         132,IDC_STATIC,"Static",SS_BITMAP | SS_CENTERIMAGE | SS_REALSIZEIMAGE | WS_BORDER,15,105,61,58
+    CONTROL         IDB_PREY_SETUP,IDC_STATIC,"Static",SS_BITMAP | SS_CENTERIMAGE | WS_BORDER,16,179,60,58
+    CONTROL         IDB_PRED_SETUP,IDC_STATIC,"Static",SS_BITMAP | SS_CENTERIMAGE | SS_REALSIZEIMAGE | WS_BORDER,15,105,61,58
     LTEXT           "Energy per hunted prey",IDC_STATIC,88,106,78,8
     LTEXT           "Pixelsize:",IDC_STATIC,16,64,31,8,0,WS_EX_TRANSPARENT
     LTEXT           "Energy to create offspring",IDC_STATIC,88,133,86,8
     LTEXT           "Breed time",IDC_STATIC,87,194,36,8
     GROUPBOX        "Display options",IDC_STATIC,7,49,396,44,0,WS_EX_TRANSPARENT
-    CONTROL         144,IDC_STATIC,"Static",SS_BITMAP,0,0,457,45,WS_EX_TRANSPARENT
+    CONTROL         IDB_LOGO,IDC_STATIC,"Static",SS_BITMAP,0,0,457,45,WS_EX_TRANSPARENT
     LTEXT           "If you can see this something is wrong",IDC_PREVIEW,195,104,202,134,SS_CENTERIMAGE | SS_SUNKEN | NOT WS_VISIBLE
     GROUPBOX        "Preview",IDC_STATIC,189,95,213,147
     CONTROL         "Show FPS",IDC_STAT2,"Button",BS_AUTOCHECKBOX | BS_LEFT | WS_TABSTOP,118,77,55,10,WS_EX_TRANSPARENT
@@ -110,8 +108,8 @@ END
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 1,0,0,1
- PRODUCTVERSION 1,1,0,0
+ FILEVERSION 1,2,0,0
+ PRODUCTVERSION 1,2,0,0
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -129,12 +127,12 @@ BEGIN
             VALUE "CompanyName", "beltoforion.de"
             VALUE "Copyright (C) 2005", "Ingo Berg"
             VALUE "FileDescription", "A wator screensaver"
-            VALUE "FileVersion", "1.1.0.0"
+            VALUE "FileVersion", "1.2.0.0"
             VALUE "InternalName", "WorldOfWator.exe"
             VALUE "LegalCopyright", "(C) 2009 Ingo Berg"
             VALUE "OriginalFilename", "WorldOfWator.exe"
             VALUE "ProductName", "World of Wator"
-            VALUE "ProductVersion", "1.1.0.0"
+            VALUE "ProductVersion", "1.2.0.0"
         END
     END
     BLOCK "VarFileInfo"
@@ -150,7 +148,7 @@ END
 //
 
 #ifdef APSTUDIO_INVOKED
-GUIDELINES DESIGNINFO 
+GUIDELINES DESIGNINFO
 BEGIN
     IDD_WATORSAVER_DIALOG, DIALOG
     BEGIN
@@ -193,7 +191,7 @@ IDB_INTRO               BITMAP                  "bitmap\\intro.bmp"
 //
 
 IDC_NULLCURSOR          CURSOR                  "res\\cursor1.cur"
-#endif    // Deutsch (Deutschland) resources
+#endif    // German (Germany) resources
 /////////////////////////////////////////////////////////////////////////////
 
 

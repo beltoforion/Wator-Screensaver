@@ -7,7 +7,7 @@
 ; (To generate a new GUID, click Tools | Generate GUID inside the IDE.)
 AppId={{6C9C7DAF-22FE-4896-8133-D482A2A6C740}
 AppName=World of Wator
-AppVerName=World of Wator - Version 1.1
+AppVerName=World of Wator - Version 1.2
 AppVersion=1.1
 AppPublisher=beltoforion.de
 AppPublisherURL=http://wator.beltoforion.de
@@ -34,7 +34,7 @@ Source: "..\Release\WorldOfWator.scr"; DestDir: "{win}\System32"; Flags: ignorev
 Source: "..\Release\WorldOfWator.scr"; DestDir: "{pf}\WorldOfWator"; Flags: ignoreversion
 Source: "COPYING.txt"; DestDir: {pf}\WorldOfWator; Flags: ignoreversion
 Source: "Readme.txt"; DestDir: {pf}\WorldOfWator; Flags: ignoreversion
-Source: "vcredist_x86.exe"; DestDir: {tmp}; Flags: ignoreversion
+;Source: "vcredist_x86.exe"; DestDir: {tmp}; Flags: ignoreversion
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]
@@ -43,7 +43,7 @@ Name: "{group}\{cm:UninstallProgram,World of Wator}"; Filename: "{uninstallexe}"
 Name: "{commondesktop}\World of Wator"; Filename: "{pf}\WorldOfWator"; Tasks: desktopicon
 
 [Run]
-Filename: {tmp}\vcredist_x86.exe; Parameters: /q;
+;Filename: {tmp}\vcredist_x86.exe; Parameters: /q;
 Filename: "{sys}\rundll32.exe"; Parameters: "desk.cpl,InstallScreenSaver {win}\System32\WorldOfWator.scr"
 ;Filename: "{sys}\WorldOfWator.scr"; Description: "{cm:LaunchProgram,World of Wator}"; Flags: nowait postinstall skipifsilent
 
