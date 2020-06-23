@@ -8,3 +8,9 @@
 *.opensdf
 *.ilk
 *.idb
+*.db
+*.db-shm
+*.db-wal
+*.opendb
+*.scr
+Release/*
