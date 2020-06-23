@@ -1,4 +1,4 @@
-![titleimage](http://beltoforion.de/en/wator/images/title.png)
+![titleimage](https://beltoforion.de/en/wator/images/title.png)
 
 [![GitHub issues](https://img.shields.io/github/issues/beltoforion/Wator-Screensaver.svg?maxAge=360)](https://github.com/beltoforion/Wator-Screensaver/issues)
 [![Version](https://img.shields.io/github/release/beltoforion/Wator-Screensaver.svg?maxAge=360)](https://github.com/beltoforion/Wator-Screensaver/releases/tag/v1.2)
@@ -10,3 +10,5 @@ Wator is a simulation based on a discrete model of predator-prey interaction. It
 To continue reading go to: 
 * https://beltoforion.de/en/wator [english]
 * https://beltoforion.de/de/wator [german]
+
+![screenshot](https://beltoforion.de/en/wator/images/wator.jpg)
