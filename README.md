@@ -11,4 +11,4 @@ To continue reading go to:
 * https://beltoforion.de/en/wator [english]
 * https://beltoforion.de/de/wator [german]
 
-![screenshot](https://beltoforion.de/en/wator/images/wator.jpg)
+![screenshot](https://beltoforion.de/en/wator/images/wator.webp)
